@@ -1,0 +1,37 @@
+{
+  "name": "three.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --port 3000 --color --hot --mode development --config webpack.dev.config.js",
+    "watch": "webpack --mode development --watch",
+    "build": "webpack --mode development --config webpack.dev.config.js",
+    "build-p": "webpack --mode production --config webpack.dev.config.js"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs3": "^7.15.4",
+    "element-plus": "^1.1.0-beta.19",
+    "jquery": "^3.6.0",
+    "three": "^0.132.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.15.0",
+    "@vue/compiler-sfc": "^3.2.19",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.3.0",
+    "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^3.3.0",
+    "unplugin-vue-components": "^0.15.6",
+    "vue-loader": "^16.8.1",
+    "webpack": "^5.55.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.0",
+    "webpack-merge": "^5.8.0"
+  }
+}
