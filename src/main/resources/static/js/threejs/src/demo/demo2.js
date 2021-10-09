@@ -4,7 +4,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-
+import register from '../register/register';
 class demo2 {
     render() {
         const ele = document.getElementById('three-view');
@@ -23,7 +23,6 @@ class demo2 {
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
         camera.position.set(5, 2, 8);
         camera.lookAt(0, 0, 0);
-
 
         renderer.render(scene, camera);
 
@@ -72,21 +71,9 @@ class demo2 {
             }
 
         }, undefined, function(error) {
-
             console.error(error);
-
         });
-
-        window.addEventListener('resize', onWindowResize);
-
-        function onWindowResize() {
-
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-        }
+        register.onResize(camera, renderer);
     }
 }
 export { demo2 }

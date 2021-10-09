@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import helvetiker_regular from 'three/examples/fonts/helvetiker_regular.typeface.json'
 import gentilis_regular from 'three/examples/fonts/gentilis_regular.typeface.json'
+import constants from '../constants/constants.js'
+import register from '../register/register.js';
+
 class demo1 {
     render() {
         const ele = document.getElementById('three-view');
@@ -41,21 +44,11 @@ class demo1 {
         })
         const textMesh = new THREE.Mesh(testG, textMaterial)
         textMesh.position.set(-15, 10, 10);
-
         scene.add(textMesh);
 
         renderer.render(scene, camera);
 
-        window.addEventListener('resize', onWindowResize);
-
-        function onWindowResize() {
-
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-        }
+        register.onResize(camera, renderer);
 
     }
 }

@@ -1,6 +1,6 @@
 class Constants {
     constructor() {
-        this.examples = []
+
     }
 }
 const constants = new Constants();

@@ -23,16 +23,16 @@
 
 <script lang="ts">
 import { ref, defineComponent } from "vue";
-import constants from "./constants/constants.js";
+import register from "./register/register.js";
 
 export default defineComponent({
   setup() {
-    const defaultSelect = constants.examples.length
-      ? constants.examples[0].title
+    const defaultSelect = register.examples.length
+      ? register.examples[0].title
       : "";
     return {
       defaultSelect: defaultSelect,
-      options: ref(constants.examples),
+      options: ref(register.examples),
       value: ref(defaultSelect),
     };
   },
@@ -44,7 +44,7 @@ export default defineComponent({
       const view = document.getElementById("three-view");
       view.innerHTML = "";
       if (value) {
-        constants.examples.forEach((element) => {
+        register.examples.forEach((element) => {
           if (element.title == value) {
             const v = new element.view();
             v.render();
