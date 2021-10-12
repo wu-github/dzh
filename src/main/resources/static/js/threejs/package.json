@@ -6,13 +6,14 @@
         "start": "webpack serve --port 3000 --color --hot --mode development --config webpack.dev.config.js",
         "watch": "webpack --mode development --watch",
         "build": "webpack --mode development --config webpack.dev.config.js",
-        "build-p": "webpack --mode production --config webpack.prod.config.js"
+        "build:p": "webpack --mode production --config webpack.prod.config.js"
     },
     "dependencies": {
         "@babel/runtime-corejs3": "^7.15.4",
         "element-plus": "^1.1.0-beta.19",
         "jquery": "^3.6.0",
-        "three": "^0.132.2"
+        "three": "^0.132.2",
+        "vue-router": "^4.0.11"
     },
     "devDependencies": {
         "@babel/cli": "^7.15.7",

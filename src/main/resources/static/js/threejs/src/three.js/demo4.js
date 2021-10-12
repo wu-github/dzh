@@ -3,6 +3,7 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { DragControls } from 'three/examples/jsm/controls/DragControls.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
+import register from './register/register';
 
 class demo4 {
 
@@ -151,6 +152,8 @@ class demo4 {
         // document.addEventListener('mouseup', this.onMouseUp.bind(this));
         window.addEventListener('keydown', this.onKeyDown.bind(this));
         window.addEventListener('keyup', this.onKeyUp.bind(this));
+
+        register.onResize(this.camera, this.renderer);
     }
 
     onDrag() {

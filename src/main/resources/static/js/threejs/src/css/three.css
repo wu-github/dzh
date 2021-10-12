@@ -1,0 +1,15 @@
+.index-container {
+    position: absolute;
+    color: white;
+    right: 0px;
+    top: 11px;
+}
+
+.index-container-select-prefix {
+    position: absolute;
+    top: 11px;
+    left: 22px;
+    width: 11px;
+    height: 11px;
+    z-index: 99999;
+}

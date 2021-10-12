@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import helvetiker_regular from 'three/examples/fonts/helvetiker_regular.typeface.json'
 import gentilis_regular from 'three/examples/fonts/gentilis_regular.typeface.json'
 import constants from '../constants/constants.js'
-import register from '../register/register.js';
+import register from './register/register.js';
 
 class demo1 {
     render() {

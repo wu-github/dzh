@@ -31,18 +31,20 @@ module.exports = {
                 test: /\.vue$/,
                 use: ['vue-loader'],
             },
-            // {
-            //     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-            //     loader: 'url-loader',
-            //     options: {
-            //         limit: 2048,
-            //         name: 'public/image/[name].[hash:7].[ext]'
-            //     }
-            // },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    esModule: false,
+                    limit: 2048,
+                    name: 'public/image/[name].[hash:7].[ext]'
+                }
+            }
             // {
             //     test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
             //     loader: 'url-loader',
             //     options: {
+            //         esModule: false,
             //         limit: 2048,
             //         name: 'public/fonts/[name].[hash:7].[ext]'
             //     }
@@ -73,11 +75,5 @@ module.exports = {
         assetFilter: function(assetFilename) {
             return assetFilename.endsWith('.js');
         }
-    },
-    devServer: {
-        static: [
-            path.join(__dirname, 'server'),
-            path.join(__dirname)
-        ]
     },
 }

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import register from '../register/register';
+import register from './register/register';
 
 class demo3 {
     render() {
