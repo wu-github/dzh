@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import register from './register/register';
+import register from '../register/register';
+import { demo } from './demo';
 
-class demo3 {
-    render() {
-        const ele = document.getElementById('three-view');
+class demo3 extends demo {
+    render(ele) {
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         ele.appendChild(renderer.domElement);

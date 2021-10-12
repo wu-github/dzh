@@ -1,7 +1,7 @@
-import { demo1 } from '../demo1.js';
-import { demo2 } from '../demo2.js';
-import { demo3 } from '../demo3.js';
-import { demo4 } from '../demo4.js';
+import { demo1 } from '../demo/demo1.js';
+import { demo2 } from '../demo/demo2.js';
+import { demo3 } from '../demo/demo3.js';
+import { demo4 } from '../demo/demo4.js';
 
 class Register {
     constructor() {
@@ -9,8 +9,8 @@ class Register {
         this.regist();
     }
     regist() {
-        this.examples.push({ title: 'demo1', view: demo1 });
         this.examples.push({ title: 'demo2', view: demo2 });
+        this.examples.push({ title: 'demo1', view: demo1 });
         this.examples.push({ title: 'demo3', view: demo3 });
         this.examples.push({ title: 'demo4', view: demo4 });
     }

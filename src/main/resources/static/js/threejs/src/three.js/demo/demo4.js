@@ -3,11 +3,12 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { DragControls } from 'three/examples/jsm/controls/DragControls.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
-import register from './register/register';
+import register from '../register/register.js';
+import { demo } from './demo';
 
-class demo4 {
-
+class demo4 extends demo {
     constructor() {
+        super();
         this.renderer;
         this.controls;
         this.camera;
@@ -27,8 +28,7 @@ class demo4 {
         this.objects = [];
     }
 
-    render() {
-        const ele = document.getElementById('three-view');
+    render(ele) {
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);

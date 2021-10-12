@@ -1,23 +1,28 @@
 <template>
-  <div class="common-layout index-container">
+  <div class="common-layout three-container">
     <el-container>
       <el-header>
         <div>
-          <img class="index-container-select-prefix" :src="chPng" />
-          <el-select
-            v-model="value"
-            clearable
-            placeholder="Select"
-            @change="change"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.title"
-              :label="item.title"
-              :value="item.title"
+          <span class="three-container-link">
+            <router-link to="/home">home</router-link>
+          </span>
+          <span>
+            <img class="three-container-select-prefix" :src="chPng" />
+            <el-select
+              v-model="value"
+              clearable
+              placeholder="Select"
+              @change="change"
             >
-            </el-option>
-          </el-select>
+              <el-option
+                v-for="item in options"
+                :key="item.title"
+                :label="item.title"
+                :value="item.title"
+              >
+              </el-option>
+            </el-select>
+          </span>
         </div>
       </el-header>
     </el-container>
@@ -30,6 +35,7 @@ import { WEBGL } from "three/examples/jsm/WebGL";
 import { ref, defineComponent } from "vue";
 import register from "../three.js/register/register.js";
 import "../css/three.css";
+const chPng = require("../image/demo/ch.png")
 
 export default defineComponent({
   setup() {
@@ -48,10 +54,11 @@ export default defineComponent({
       document.getElementById("container").appendChild(warning);
     }
     return {
+      chPng,
       defaultSelect,
       options,
       value,
-      chPng: require("../../public/image/demo/ch.png"),
+      currentView:null,
     };
   },
   mounted() {
@@ -62,10 +69,11 @@ export default defineComponent({
       const view = document.getElementById("three-view");
       view.innerHTML = "";
       if (value) {
+        this.currentView && this.currentView.dispose();
         register.examples.forEach((element) => {
           if (element.title == value) {
-            const v = new element.view();
-            v.render();
+            this.currentView = new element.view();
+            this.currentView.render(view);
           }
         });
       }

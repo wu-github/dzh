@@ -1,12 +1,11 @@
 import * as THREE from 'three';
 import helvetiker_regular from 'three/examples/fonts/helvetiker_regular.typeface.json'
 import gentilis_regular from 'three/examples/fonts/gentilis_regular.typeface.json'
-import constants from '../constants/constants.js'
-import register from './register/register.js';
+import register from '../register/register.js';
+import { demo } from './demo';
 
-class demo1 {
-    render() {
-        const ele = document.getElementById('three-view');
+class demo1 extends demo {
+    render(ele) {
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         ele.appendChild(renderer.domElement);
