@@ -35,7 +35,7 @@ import { WEBGL } from "three/examples/jsm/WebGL";
 import { ref, defineComponent } from "vue";
 import register from "../three.js/register/register.js";
 import "../css/three.css";
-const chPng = require("../image/demo/ch.png")
+const chPng = require("../image/demo/ch.png");
 
 export default defineComponent({
   setup() {
@@ -58,18 +58,21 @@ export default defineComponent({
       defaultSelect,
       options,
       value,
-      currentView:null,
+      currentView: null,
     };
   },
   mounted() {
     this.change(this.defaultSelect);
+  },
+  unmounted() {
+    this.dispose();
   },
   methods: {
     change(value) {
       const view = document.getElementById("three-view");
       view.innerHTML = "";
       if (value) {
-        this.currentView && this.currentView.dispose();
+        this.dispose();
         register.examples.forEach((element) => {
           if (element.title == value) {
             this.currentView = new element.view();
@@ -77,6 +80,9 @@ export default defineComponent({
           }
         });
       }
+    },
+    dispose() {
+      this.currentView && this.currentView.dispose();
     },
   },
 });

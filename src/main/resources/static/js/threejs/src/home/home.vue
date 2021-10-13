@@ -5,7 +5,10 @@
         <div>
           <h5>home</h5>
         </div>
-        <router-link to="/three">three</router-link>
+        <div class="home-container-link">
+          <router-link to="/three">three</router-link>
+          <router-link to="/three-ammo">three-ammo</router-link>
+        </div>
       </el-header>
     </el-container>
   </div>

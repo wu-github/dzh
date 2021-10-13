@@ -26,6 +26,7 @@ class demo4 extends demo {
         this.group = new THREE.Group();
         this.selectedGroup = new THREE.Group();;
         this.objects = [];
+        this.resources = [];
     }
 
     render(ele) {
@@ -72,6 +73,10 @@ class demo4 extends demo {
         light.shadow.camera.left = -2;
         light.shadow.mapSize.set(4096, 4096);
         this.scene.add(light);
+        this.resources.push(floorGeometry);
+        this.resources.push(floorMaterial);
+        this.resources.push(floor);
+        this.resources.push(light);
 
         this.scene.add(this.group);
         this.scene.add(this.selectedGroup);
@@ -110,7 +115,9 @@ class demo4 extends demo {
 
             this.group.add(object);
             this.objects.push(object);
-
+            this.resources.push(geometry);
+            this.resources.push(material);
+            this.resources.push(object);
         }
 
         // controllers
@@ -140,6 +147,8 @@ class demo4 extends demo {
         const line = new THREE.Line(geometry);
         line.name = 'line';
         line.scale.z = 5;
+        this.resources.push(geometry);
+        this.resources.push(line);
 
         this.controller1.add(line.clone());
         this.controller2.add(line.clone());
@@ -154,6 +163,28 @@ class demo4 extends demo {
         window.addEventListener('keyup', this.onKeyUp.bind(this));
 
         register.onResize(this.camera, this.renderer);
+    }
+
+    dispose() {
+        try {
+            this.group.clear();
+            this.selectedGroup.clear();
+            this.scene.clear();
+            this.camera.clear();
+            this.renderer.dispose();
+            this.renderer.forceContextLoss();
+            this.renderer.content = null;
+            let gl = this.renderer.domElement.getContext("webgl");
+            gl && gl.getExtension("WEBGL_lose_context").loseContext();
+            for (let i = 0; i < this.resources.length; i++) {
+                this.resources[i].dispose && this.resources[i].dispose();
+                this.resources[i].clear && this.resources[i].clear();
+            }
+            console.debug(this.renderer.info);
+
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     onDrag() {

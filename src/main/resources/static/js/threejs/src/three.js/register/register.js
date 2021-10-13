@@ -9,8 +9,8 @@ class Register {
         this.regist();
     }
     regist() {
-        this.examples.push({ title: 'demo2', view: demo2 });
         this.examples.push({ title: 'demo1', view: demo1 });
+        this.examples.push({ title: 'demo2', view: demo2 });
         this.examples.push({ title: 'demo3', view: demo3 });
         this.examples.push({ title: 'demo4', view: demo4 });
     }

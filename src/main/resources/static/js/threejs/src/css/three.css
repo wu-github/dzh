@@ -7,8 +7,7 @@
 
 .three-container-link a {
     display: inline-block;
-    width: 55px;
-    text-align: center;
+    margin: 0 11px;
 }
 
 .three-container-select-prefix {

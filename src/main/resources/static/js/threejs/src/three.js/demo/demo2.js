@@ -94,6 +94,7 @@ class demo2 extends demo {
     dispose() {
         try {
             this.scene.clear();
+            this.camera.clear();
             this.renderer.dispose();
             this.renderer.forceContextLoss();
             this.renderer.content = null;
@@ -105,7 +106,7 @@ class demo2 extends demo {
                 this.resources[i].dispose && this.resources[i].dispose();
                 this.resources[i].clear && this.resources[i].clear();
             }
-            console.log(this.renderer.info)
+            console.debug(this.renderer.info);
         } catch (e) {
             console.error(e)
         }
