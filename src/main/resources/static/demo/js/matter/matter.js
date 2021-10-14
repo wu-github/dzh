@@ -60,7 +60,7 @@ Rain.sprites = function() {
                         friction: 0.01,
                         render: {
                             sprite: {
-                                texture: '../../img/rain/ball.png',
+                                texture: '../img/matter/ball.png',
                                 xScale: scale,
                                 yScale: scale,
                             }
