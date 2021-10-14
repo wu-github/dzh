@@ -40,7 +40,7 @@ export default defineComponent({
       let that = this;
 
       // Graphics variables
-      let container, stats;
+      let stats;
       let camera, controls, scene, renderer;
       let textureLoader;
       const clock = new THREE.Clock();
@@ -56,19 +56,22 @@ export default defineComponent({
 
       let armMovement = 0;
 
+      let ele = document.getElementById("three-view");
+
       if (typeof Ammo == "function") {
         Ammo().then(function (AmmoLib) {
           Ammo = AmmoLib;
-          init();
+          init(ele);
           animate();
         });
       } else {
-        init();
+        ele.innerHTML = "";
+        init(ele);
         animate();
       }
 
-      function init() {
-        initGraphics();
+      function init(ele) {
+        initGraphics(ele);
 
         initPhysics();
 
@@ -77,9 +80,7 @@ export default defineComponent({
         initInput();
       }
 
-      function initGraphics() {
-        container = document.getElementById("three-view");
-
+      function initGraphics(ele) {
         camera = that.camera = new THREE.PerspectiveCamera(
           60,
           window.innerWidth / window.innerHeight,
@@ -96,7 +97,7 @@ export default defineComponent({
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = true;
-        container.appendChild(renderer.domElement);
+        ele.appendChild(renderer.domElement);
 
         controls = new OrbitControls(camera, renderer.domElement);
         controls.target.set(0, 2, 0);
@@ -128,7 +129,7 @@ export default defineComponent({
         stats = new Stats();
         stats.domElement.style.position = "absolute";
         stats.domElement.style.top = "0px";
-        container.appendChild(stats.domElement);
+        ele.appendChild(stats.domElement);
 
         window.addEventListener("resize", onWindowResize);
       }
@@ -177,13 +178,16 @@ export default defineComponent({
         );
         ground.castShadow = true;
         ground.receiveShadow = true;
-        textureLoader.load("textures/grid.png", function (texture) {
-          texture.wrapS = THREE.RepeatWrapping;
-          texture.wrapT = THREE.RepeatWrapping;
-          texture.repeat.set(40, 40);
-          ground.material.map = texture;
-          ground.material.needsUpdate = true;
-        });
+        textureLoader.load(
+          "public/image/textures/grid.png",
+          function (texture) {
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(40, 40);
+            ground.material.map = texture;
+            ground.material.needsUpdate = true;
+          }
+        );
 
         // Wall
         const brickMass = 0.5;
@@ -265,13 +269,16 @@ export default defineComponent({
         cloth.castShadow = true;
         cloth.receiveShadow = true;
         scene.add(cloth);
-        textureLoader.load("textures/grid.png", function (texture) {
-          texture.wrapS = THREE.RepeatWrapping;
-          texture.wrapT = THREE.RepeatWrapping;
-          texture.repeat.set(clothNumSegmentsZ, clothNumSegmentsY);
-          cloth.material.map = texture;
-          cloth.material.needsUpdate = true;
-        });
+        textureLoader.load(
+          "public/image/textures/grid.png",
+          function (texture) {
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(clothNumSegmentsZ, clothNumSegmentsY);
+            cloth.material.map = texture;
+            cloth.material.needsUpdate = true;
+          }
+        );
 
         // Cloth physic object
         const softBodyHelpers = new Ammo.btSoftBodyHelpers();

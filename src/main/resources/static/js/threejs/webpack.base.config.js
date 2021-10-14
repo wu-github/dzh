@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
@@ -12,8 +13,8 @@ module.exports = {
         'app': './src/index.js'
     },
     output: {
-        path: path.join(__dirname, 'build/dist'),
-        filename: 'main.js',
+        path: path.join(__dirname, 'build'),
+        filename: 'dist/main.js',
         clean: true,
     },
     target: ['web', 'es5'],
@@ -52,9 +53,14 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'index.html'),
             filename: path.join(__dirname, 'build/index.html'),
+        }),
+        new VueLoaderPlugin(),
+        Components({
+            resolvers: [ElementPlusResolver()],
         }),
         new copyWebpackPlugin({
             patterns: [{
@@ -62,10 +68,6 @@ module.exports = {
                 to: path.join(__dirname, 'build/public'),
                 toType: 'dir'
             }]
-        }),
-        new VueLoaderPlugin(),
-        Components({
-            resolvers: [ElementPlusResolver()],
         }),
     ],
     performance: {
