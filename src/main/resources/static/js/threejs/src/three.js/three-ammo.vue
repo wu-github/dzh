@@ -27,6 +27,7 @@ export default defineComponent({
       renderer: null,
       camera: null,
       scene: null,
+      resources: [],
     };
   },
   mounted() {
@@ -104,9 +105,11 @@ export default defineComponent({
         controls.update();
 
         textureLoader = new THREE.TextureLoader();
+        that.resources.push(textureLoader);
 
         const ambientLight = new THREE.AmbientLight(0x404040);
         scene.add(ambientLight);
+        that.resources.push(ambientLight);
 
         const light = new THREE.DirectionalLight(0xffffff, 1);
         light.position.set(-7, 10, 15);
@@ -125,11 +128,13 @@ export default defineComponent({
 
         light.shadow.bias = -0.003;
         scene.add(light);
+        that.resources.push(light);
 
         stats = new Stats();
         stats.domElement.style.position = "absolute";
         stats.domElement.style.top = "0px";
         ele.appendChild(stats.domElement);
+        that.resources.push(stats);
 
         window.addEventListener("resize", onWindowResize);
       }
@@ -188,6 +193,10 @@ export default defineComponent({
             ground.material.needsUpdate = true;
           }
         );
+
+        that.resources.push(pos);
+        that.resources.push(quat);
+        that.resources.push(ground);
 
         // Wall
         const brickMass = 0.5;
@@ -260,15 +269,17 @@ export default defineComponent({
           clothPos.y + clothHeight * 0.5,
           clothPos.z - clothWidth * 0.5
         );
-
+        that.resources.push(clothGeometry);
         const clothMaterial = new THREE.MeshLambertMaterial({
           color: 0xffffff,
           side: THREE.DoubleSide,
         });
+        that.resources.push(clothMaterial);
         cloth = new THREE.Mesh(clothGeometry, clothMaterial);
         cloth.castShadow = true;
         cloth.receiveShadow = true;
         scene.add(cloth);
+        that.resources.push(cloth);
         textureLoader.load(
           "public/image/textures/grid.png",
           function (texture) {
@@ -411,7 +422,7 @@ export default defineComponent({
         shape.setMargin(margin);
 
         createRigidBody(threeObject, shape, mass, pos, quat);
-
+        that.resources.push(threeObject);
         return threeObject;
       }
 
@@ -453,11 +464,15 @@ export default defineComponent({
       }
 
       function createRandomColor() {
-        return Math.floor(Math.random() * (1 << 24));
+        let color = Math.floor(Math.random() * (1 << 24));
+        that.resources.push(color);
+        return color;
       }
 
       function createMaterial() {
-        return new THREE.MeshPhongMaterial({ color: createRandomColor() });
+        let material = new THREE.MeshPhongMaterial({ color: createRandomColor() });
+        that.resources.push(material);
+        return material;
       }
 
       function initInput() {
@@ -551,6 +566,11 @@ export default defineComponent({
       this.renderer.content = null;
       let gl = this.renderer.domElement.getContext("webgl");
       gl && gl.getExtension("WEBGL_lose_context").loseContext();
+      for (let i = 0; i < this.resources.length; i++) {
+        this.resources[i].dispose && this.resources[i].dispose();
+        this.resources[i].clear && this.resources[i].clear();
+      }
+      console.debug(this.renderer.info);
     },
   },
 });
