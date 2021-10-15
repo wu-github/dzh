@@ -13,7 +13,7 @@ public class UserService_m implements IUserService_m {
     private UserRepository_m userRepository_m;
 
     @Override
-    public User getTest(int id) {
+    public User getUser(int id) {
         return userRepository_m.select(id);
     }
 }

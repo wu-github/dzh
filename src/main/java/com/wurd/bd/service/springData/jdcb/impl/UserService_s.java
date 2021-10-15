@@ -1,6 +1,6 @@
 package com.wurd.bd.service.springData.jdcb.impl;
 
-import com.wurd.bd.dataJdbc.UserRepository_s;
+import com.wurd.bd.springData.UserRepository_s;
 import com.wurd.bd.entity.User;
 import com.wurd.bd.service.springData.jdcb.IUserService_s;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class UserService_s implements IUserService_s {
 
-    @Autowired
+    @Autowired(required = false)
     private UserRepository_s userRepository_s;
 
     @Override
@@ -22,13 +22,13 @@ public class UserService_s implements IUserService_s {
     }
 
     @Override
-    public User findTestWithId(int id) {
+    public User findUserWithId(int id) {
 
         return userRepository_s.findUserWithId(id);
     }
 
     @Override
-    public List<User> findTestsWithNameAge(String name, int age) {
+    public List<User> findUsersWithNameAge(String name, int age) {
 
         return userRepository_s.findUsersWithNameAge(name, age);
     }
