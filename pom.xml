@@ -344,7 +344,7 @@
                     src/main/resources
                 </directory>
                 <excludes>
-                    <exclude>static/js/threejs/node_modules/**</exclude>
+                    <exclude>static/dzh/node_modules/**</exclude>
                 </excludes>
             </resource>
         </resources>
