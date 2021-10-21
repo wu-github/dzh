@@ -1,14 +1,11 @@
 package com.wurd.bd.controller;
 
 import com.wurd.bd.entity.User;
-import com.wurd.bd.exception.CommonException;
 import com.wurd.bd.service.Mybatis.IUserService_m;
 import com.wurd.bd.service.springData.jdcb.IUserService_s;
 import com.wurd.bd.service.springJpa.IUserService_jpa;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -62,8 +59,8 @@ public class UserController {
         return test;
     }
 
-    @GetMapping("/_jpa/save")
-    public User user_jpa_save(User user) {
+    @PostMapping("/_jpa/save")
+    public User user_jpa_save(@RequestBody User user) {
         User test = userService_jpa.save(user);
         return test;
     }
