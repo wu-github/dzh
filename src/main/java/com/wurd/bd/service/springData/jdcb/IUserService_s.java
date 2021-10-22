@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface IUserService_s {
 
-    Iterator<User> findAll();
+    Iterator<User> findAll() throws Exception;
 
-    User findUserWithId(int id);
+    User findUserWithId(int id) throws Exception;
 
-    List<User> findUsersWithNameAge(String name, int age);
+    List<User> findUsersWithNameAge(String name, int age) throws Exception;
 }

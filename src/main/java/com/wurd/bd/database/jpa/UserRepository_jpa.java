@@ -1,4 +1,4 @@
-package com.wurd.bd.jpa;
+package com.wurd.bd.database.jpa;
 
 import com.wurd.bd.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

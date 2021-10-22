@@ -1,4 +1,4 @@
-package com.wurd.bd.springData;
+package com.wurd.bd.database.springData;
 
 import com.wurd.bd.entity.User;
 import org.springframework.data.jdbc.repository.query.Query;

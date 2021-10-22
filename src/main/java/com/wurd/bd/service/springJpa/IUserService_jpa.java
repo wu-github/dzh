@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface IUserService_jpa {
 
-    Iterator<User> findAll();
+    Iterator<User> findAll() throws Exception;
 
-    User findUserWithId(int id);
+    User findUserWithId(int id) throws Exception;
 
-    List<User> findUsersWithNameAge(String name, int age);
+    List<User> findUsersWithNameAge(String name, int age) throws Exception;
 
-    User save(User user);
+    User save(User user) throws Exception;
 }

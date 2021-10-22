@@ -1,6 +1,6 @@
 package com.wurd.bd.service.springData.jdcb.impl;
 
-import com.wurd.bd.springData.UserRepository_s;
+import com.wurd.bd.database.springData.UserRepository_s;
 import com.wurd.bd.entity.User;
 import com.wurd.bd.service.springData.jdcb.IUserService_s;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,19 @@ public class UserService_s implements IUserService_s {
     private UserRepository_s userRepository_s;
 
     @Override
-    public Iterator<User> findAll() {
+    public Iterator<User> findAll() throws Exception {
 
         return userRepository_s.findAll().iterator();
     }
 
     @Override
-    public User findUserWithId(int id) {
+    public User findUserWithId(int id) throws Exception {
 
         return userRepository_s.findUserWithId(id);
     }
 
     @Override
-    public List<User> findUsersWithNameAge(String name, int age) {
+    public List<User> findUsersWithNameAge(String name, int age) throws Exception {
 
         return userRepository_s.findUsersWithNameAge(name, age);
     }

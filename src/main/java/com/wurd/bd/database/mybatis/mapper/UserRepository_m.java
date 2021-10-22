@@ -1,4 +1,4 @@
-package com.wurd.bd.mybatis.mapper;
+package com.wurd.bd.database.mybatis.mapper;
 
 import com.wurd.bd.entity.User;
 import org.apache.ibatis.annotations.Mapper;
