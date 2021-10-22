@@ -1,4 +1,4 @@
-package com.wurd.bd.websocket.config;
+package com.wurd.bd.websocket;
 
 import org.springframework.stereotype.Component;
 
