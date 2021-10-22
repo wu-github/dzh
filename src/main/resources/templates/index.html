@@ -9,12 +9,52 @@
     Welcome
 </h5>
 <script>
+    var socket = null;
+
+    if (window.WebSocket) {
+        var protocol = window.location.protocol;
+        protocol = protocol == 'https:'?"wss":"ws";
+        var hostname = window.location.hostname;
+        var port = window.location.port;
+        var path = protocol + "://" + hostname + ":" + port + "/index";
+        socket = new WebSocket(path);
+    } else {
+        console.log("Not support webSocket")
+    }
+
+    socket.onerror = function(e) {
+        console.error(e);
+    };
+
+    socket.onopen = function(event) {
+        console.log("open");
+    }
+
+    socket.onmessage = function(event) {
+        console.log(event.data);
+    }
+
+    socket.onclose = function() {
+        console.log("close");
+    }
+
+    window.onbeforeunload = function() {
+        socket.close();
+    }
+
+    function send(message) {
+        socket.send(message);
+    }
+
+</script>
+<script>
     window.onload = function(){
         var url = '[[@{/}]]' + 'dzh/build/index.html';
         setTimeout(function(){
             window.location.href = url;
         },3000);
     }
+
 </script>
 
 </body>
