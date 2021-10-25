@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import home from "../home/home.vue";
-import three from "../three.js/three.vue";
+import threeDemo from "../three.js/three.vue";
 import threeAmmo from "../three.js/three-ammo.vue";
+import threeKali from "../three.js/three-kali.vue";
 
 const routes = [{
         path: "/",
@@ -13,12 +14,16 @@ const routes = [{
         component: home
     },
     {
-        path: "/three",
-        component: three
+        path: "/three-demo",
+        component: threeDemo
     },
     {
         path: "/three-ammo",
         component: threeAmmo
+    },
+    {
+        path: "/three-kali",
+        component: threeKali
     }
 ]
 

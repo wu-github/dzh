@@ -6,7 +6,8 @@
           <h5>home</h5>
         </div>
         <div class="home-container-link">
-          <router-link to="/three">three</router-link>
+          <router-link to="/three-demo">three-demo</router-link>
+          <router-link to="/three-kali">three-kali</router-link>
           <router-link to="/three-ammo">three-ammo</router-link>
         </div>
       </el-header>

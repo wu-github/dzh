@@ -2,6 +2,7 @@ import { demo1 } from '../demo/demo1.js';
 import { demo2 } from '../demo/demo2.js';
 import { demo3 } from '../demo/demo3.js';
 import { demo4 } from '../demo/demo4.js';
+import { demo5 } from '../demo/demo5.js';
 
 class Register {
     constructor() {
@@ -13,6 +14,7 @@ class Register {
         this.examples.push({ title: 'demo2', view: demo2 });
         this.examples.push({ title: 'demo3', view: demo3 });
         this.examples.push({ title: 'demo4', view: demo4 });
+        this.examples.push({ title: 'demo5', view: demo5 });
     }
     onResize(camera, renderer) {
         window.addEventListener('resize', onWindowResize);

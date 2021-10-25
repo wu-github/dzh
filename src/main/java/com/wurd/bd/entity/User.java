@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Data
@@ -18,9 +19,11 @@ public class User {
     @javax.persistence.Column(name = "id", nullable = false)
     private int id;
     @javax.persistence.Column(name = "name", nullable = false)
+    @NotBlank
     private String name;
     private int age;
     @javax.persistence.Column(name = "tel", nullable = false, updatable = false)
+    @NotBlank
     private String tel;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

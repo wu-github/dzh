@@ -7,12 +7,15 @@ import com.wurd.bd.i18n.MessageUtil;
 import com.wurd.bd.service.Mybatis.IUserService_m;
 import com.wurd.bd.service.springData.jdcb.IUserService_s;
 import com.wurd.bd.service.springJpa.IUserService_jpa;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Iterator;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -79,6 +82,9 @@ public class UserController {
 
     @GetMapping("/_jpa/all")
     public Iterator<User> user_jpa_all() throws Exception {
+        log.info("info");
+        log.error("error");
+        log.debug("debug");
         try {
             Iterator<User> tests = userService_jpa.findAll();
             return tests;
@@ -102,7 +108,7 @@ public class UserController {
     }
 
     @PostMapping("/_jpa/save")
-    public User user_jpa_save(@RequestBody User user) throws Exception {
+    public User user_jpa_save(@RequestBody @Valid User user) throws Exception {
         try {
             User test = userService_jpa.save(user);
             return test;

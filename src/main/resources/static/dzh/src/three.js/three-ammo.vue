@@ -470,7 +470,9 @@ export default defineComponent({
       }
 
       function createMaterial() {
-        let material = new THREE.MeshPhongMaterial({ color: createRandomColor() });
+        let material = new THREE.MeshPhongMaterial({
+          color: createRandomColor(),
+        });
         that.resources.push(material);
         return material;
       }
