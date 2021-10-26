@@ -105,7 +105,8 @@ export default defineComponent({
       }
 
       const modelFile = "./public/module/Kali/Kali.pmx";
-      const vmdFiles = [];
+      const modelFile_ = "./public/module/Kali/Kali_weapon.pmx";
+      const vmdFiles = ["./public/module/mmd/wavefile_v2.vmd"];
 
       let helper = (this.helper = new MMDAnimationHelper({
         afterglow: 2.0,
@@ -114,13 +115,56 @@ export default defineComponent({
       const loader = new MMDLoader();
       this.resources.push(loader);
 
-      loader.loadWithAnimation(
+      loader.load(
         modelFile,
+        function (mmd) {
+          let mesh = mmd;
+          mesh.position.y = -10;
+          scene.add(mesh);
+          that.resources.push(mesh);
+        },
+        onProgress,
+        null
+      );
+
+      // loader.loadWithAnimation(
+      //   modelFile,
+      //   vmdFiles,
+      //   function (mmd) {
+      //     let mesh = mmd.mesh;
+      //     mesh.position.y = -10;
+      //     scene.add(mesh);
+      //     that.resources.push(mesh);
+      //     helper.add(mesh, {
+      //       animation: mmd.animation,
+      //       physics: true,
+      //     });
+
+      //     let ikHelper = helper.objects.get(mesh).ikSolver.createHelper();
+      //     ikHelper.visible = false;
+      //     scene.add(ikHelper);
+      //     that.resources.push(ikHelper);
+
+      //     let physicsHelper = helper.objects.get(mesh).physics.createHelper();
+      //     physicsHelper.visible = false;
+      //     scene.add(physicsHelper);
+      //     that.resources.push(physicsHelper);
+          
+      //   },
+      //   onProgress,
+      //   null
+      // );
+
+      //load with animation
+      loader.loadWithAnimation(
+        modelFile_,
         vmdFiles,
         function (mmd) {
           let mesh = mmd.mesh;
+          mesh.position.x = 22;
+          mesh.position.y = -10;
           scene.add(mesh);
-
+          that.resources.push(mesh);
           helper.add(mesh, {
             animation: mmd.animation,
             physics: true,
@@ -135,6 +179,7 @@ export default defineComponent({
           physicsHelper.visible = false;
           scene.add(physicsHelper);
           that.resources.push(physicsHelper);
+          
         },
         onProgress,
         null
