@@ -82,9 +82,6 @@ public class UserController {
 
     @GetMapping("/_jpa/all")
     public Iterator<User> user_jpa_all() throws Exception {
-        log.info("info");
-        log.error("error");
-        log.debug("debug");
         try {
             Iterator<User> tests = userService_jpa.findAll();
             return tests;
