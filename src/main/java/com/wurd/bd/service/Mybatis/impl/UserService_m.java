@@ -6,6 +6,8 @@ import com.wurd.bd.service.Mybatis.IUserService_m;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService_m implements IUserService_m {
 
@@ -15,5 +17,10 @@ public class UserService_m implements IUserService_m {
     @Override
     public User getUser(int id) throws Exception {
         return userRepository_m.select(id);
+    }
+
+    @Override
+    public List<User> getAllUser() throws Exception {
+        return userRepository_m.all();
     }
 }

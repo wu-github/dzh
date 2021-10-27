@@ -44,35 +44,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/_s/all")
-    public Iterator<User> user_s_all() throws Exception {
+    @GetMapping("/_m/all")
+    public List<User> user_m_all() throws Exception {
         try {
-            Iterator<User> tests = userService_s.findAll();
-            return tests;
-        } catch (CommonException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
-        }
-    }
-
-    @GetMapping("/_s/id")
-    public User user_s_id(int id) throws Exception {
-        try {
-            User test = userService_s.findUserWithId(id);
+            List<User> test = userService_m.getAllUser();
             return test;
-        } catch (CommonException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
-        }
-    }
-
-    @GetMapping("/_s/search")
-    public List<User> user_s_search(String name, int age) throws Exception {
-        try {
-            List<User> tests = userService_s.findUsersWithNameAge(name, age);
-            return tests;
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
@@ -120,6 +96,45 @@ public class UserController {
     public List<User> user_jpa_search(String name, int age) throws Exception {
         try {
             List<User> tests = userService_jpa.findUsersWithNameAge(name, age);
+            return tests;
+        } catch (CommonException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
+        }
+    }
+
+    @GetMapping("/_s/all")
+    @Deprecated
+    public Iterator<User> user_s_all() throws Exception {
+        try {
+            Iterator<User> tests = userService_s.findAll();
+            return tests;
+        } catch (CommonException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
+        }
+    }
+
+    @GetMapping("/_s/id")
+    @Deprecated
+    public User user_s_id(int id) throws Exception {
+        try {
+            User test = userService_s.findUserWithId(id);
+            return test;
+        } catch (CommonException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
+        }
+    }
+
+    @GetMapping("/_s/search")
+    @Deprecated
+    public List<User> user_s_search(String name, int age) throws Exception {
+        try {
+            List<User> tests = userService_s.findUsersWithNameAge(name, age);
             return tests;
         } catch (CommonException e) {
             throw e;

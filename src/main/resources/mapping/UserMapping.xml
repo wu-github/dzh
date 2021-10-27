@@ -2,12 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wurd.bd.database.mybatis.mapper.UserRepository_m">
 
-    <resultMap id="testResultMap" type="com.wurd.bd.entity.User">
+    <resultMap id="processResultMap" type="com.wurd.bd.entity.Process">
         <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
     </resultMap>
 
-    <select id="select" resultMap="testResultMap">
+    <resultMap id="userResultMap" type="com.wurd.bd.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <collection property="processes" javaType="java.util.List" ofType="com.wurd.bd.entity.Process">
+            <result column="id" jdbcType="INTEGER" property="id" />
+            <result column="name" jdbcType="VARCHAR" property="name" />
+        </collection>
+    </resultMap>
+
+    <select id="select" resultMap="userResultMap">
         select * from user where id = #{id}
+    </select>
+
+    <select id="all" resultMap="userResultMap">
+        select * from user
     </select>
 
 </mapper>

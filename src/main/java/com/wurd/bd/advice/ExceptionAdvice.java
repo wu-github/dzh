@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -24,14 +25,14 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(CommonException.class)
     @ResponseBody
-    public CommonVo customExceptionHnadler(CommonException e) {
+    public CommonVo customExceptionHandler(CommonException e) {
         e.printStackTrace();
         return CommonVo.error(e.getMsg());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public CommonVo customExceptionHnadler(MethodArgumentNotValidException e) throws MethodArgumentNotValidException {
+    public CommonVo customExceptionHandler(MethodArgumentNotValidException e) throws MethodArgumentNotValidException {
         e.printStackTrace();
         List<String> errors = e.getBindingResult().getFieldErrors().stream()
                 .map(FieldError::getDefaultMessage)
@@ -40,9 +41,16 @@ public class ExceptionAdvice {
         return vo;
     }
 
+    @ExceptionHandler(ServletException.class)
+    @ResponseBody
+    public CommonVo customServletExceptionHandler(ServletException e) {
+        e.printStackTrace();
+        return CommonVo.error(e.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public CommonVo customExceptionHnadler(Exception e) {
+    public CommonVo customExceptionHandler(Exception e) {
         e.printStackTrace();
         return CommonVo.error(messageUtil.getMessage(Constants.ERROR_500_MSG));
     }
