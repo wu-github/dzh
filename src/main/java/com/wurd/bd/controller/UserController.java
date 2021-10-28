@@ -10,6 +10,7 @@ import com.wurd.bd.service.springData.jdcb.IUserService_s;
 import com.wurd.bd.service.springJpa.IUserService_jpa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -76,6 +77,19 @@ public class UserController {
     public Iterator<User> user_jpa_all() throws Exception {
         try {
             Iterator<User> tests = userService_jpa.findAll();
+            return tests;
+        } catch (CommonException e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
+        }
+    }
+
+    @GetMapping("/_jpa/page")
+    public Page<User> user_jpa_page(int pageNum, int pageSize) throws Exception {
+        try {
+            Page<User> tests = userService_jpa.findByPage(pageNum, pageSize);
             return tests;
         } catch (CommonException e) {
             throw e;
