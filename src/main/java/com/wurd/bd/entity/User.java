@@ -9,22 +9,22 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Data
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"tel"})})
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"u_tel"})})
 @Entity
 public class User {
     @Id
-    @Column("id")
+    @Column("u_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @javax.persistence.Id
-    @javax.persistence.Column(name = "id", nullable = false)
-    private int id;
-    @javax.persistence.Column(name = "name", nullable = false)
+    @javax.persistence.Column(name = "u_id", nullable = false)
+    private int u_id;
+    @javax.persistence.Column(name = "u_name", nullable = false)
     @NotBlank
-    private String name;
-    private int age;
-    @javax.persistence.Column(name = "tel", nullable = false, updatable = false)
+    private String u_name;
+    private int u_age;
+    @javax.persistence.Column(name = "u_tel", nullable = false, updatable = false)
     @NotBlank
-    private String tel;
+    private String u_tel;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")

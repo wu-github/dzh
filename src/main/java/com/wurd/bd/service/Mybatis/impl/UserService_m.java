@@ -1,5 +1,7 @@
 package com.wurd.bd.service.Mybatis.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wurd.bd.entity.User;
 import com.wurd.bd.database.mybatis.mapper.UserRepository_m;
 import com.wurd.bd.service.Mybatis.IUserService_m;
@@ -22,5 +24,13 @@ public class UserService_m implements IUserService_m {
     @Override
     public List<User> getAllUser() throws Exception {
         return userRepository_m.all();
+    }
+
+    @Override
+    public PageInfo<User> getUserPage(int pageNum, int pageSize) throws Exception {
+        PageHelper.startPage(pageNum, pageSize);
+        List<User> users = userRepository_m.all();
+        PageInfo<User> pageInfo = new PageInfo<User>(users);
+        return pageInfo;
     }
 }

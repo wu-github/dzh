@@ -2,26 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wurd.bd.database.mybatis.mapper.UserRepository_m">
 
-    <resultMap id="processResultMap" type="com.wurd.bd.entity.Process">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
+    <resultMap id="processResultMap" autoMapping="true" type="com.wurd.bd.entity.Process">
     </resultMap>
 
-    <resultMap id="userResultMap" type="com.wurd.bd.entity.User">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
-        <collection property="processes" javaType="java.util.List" ofType="com.wurd.bd.entity.Process">
-            <result column="id" jdbcType="INTEGER" property="id" />
-            <result column="name" jdbcType="VARCHAR" property="name" />
+    <resultMap id="userResultMap" autoMapping="true" type="com.wurd.bd.entity.User">
+        <result column="u_id" jdbcType="INTEGER" property="u_id"/>
+        <result column="u_name" jdbcType="VARCHAR" property="u_name"/>
+<!--        <collection property="processes" autoMapping="true" javaType="java.util.List"-->
+<!--                    ofType="com.wurd.bd.entity.Process">-->
+<!--        </collection>-->
+        <collection property="processes" resultMap="processResultMap">
         </collection>
     </resultMap>
 
     <select id="select" resultMap="userResultMap">
-        select * from user where id = #{id}
+        select u.*,p.* from user u, process p where u.u_id = #{id} and u.u_id = p.user_id
     </select>
 
     <select id="all" resultMap="userResultMap">
-        select * from user
+        select u.*,p.* from user u, process p where u.u_id = p.user_id
     </select>
 
 </mapper>

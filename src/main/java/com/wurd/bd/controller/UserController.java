@@ -1,5 +1,6 @@
 package com.wurd.bd.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.wurd.bd.constants.Constants;
 import com.wurd.bd.entity.User;
 import com.wurd.bd.exception.CommonException;
@@ -40,6 +41,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }
@@ -52,6 +54,20 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
+            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
+        }
+    }
+
+    @GetMapping("/_m/page")
+    public PageInfo<User> user_m_page(int pageNum, int pageSize) throws Exception {
+        try {
+            PageInfo<User> test = userService_m.getUserPage(pageNum, pageSize);
+            return test;
+        } catch (CommonException e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }
@@ -64,6 +80,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }
@@ -76,6 +93,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }
@@ -88,6 +106,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_SAVE));
         }
     }
@@ -100,6 +119,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }
@@ -113,6 +133,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }
@@ -126,6 +147,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }
@@ -139,6 +161,7 @@ public class UserController {
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_GET));
         }
     }

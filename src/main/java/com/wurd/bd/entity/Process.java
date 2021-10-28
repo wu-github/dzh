@@ -11,11 +11,11 @@ import javax.persistence.*;
 @Entity
 public class Process {
     @Id
-    @Column("id")
+    @Column("p_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @javax.persistence.Id
-    @javax.persistence.Column(name = "id", nullable = false)
-    private int id;
-    @javax.persistence.Column(name = "name", nullable = false)
-    private String name;
+    @javax.persistence.Column(name = "p_id", nullable = false)
+    private int p_id;
+    @javax.persistence.Column(name = "p_name", nullable = false)
+    private String p_name;
 }
