@@ -46,6 +46,6 @@ public class UserService_jpa implements IUserService_jpa {
     @Override
     public Page<User> findByPage(int pageNum, int pageSize) throws Exception {
         Pageable pageable = PageRequest.of(pageNum, pageSize);
-        return userRepository_jpa.findByPage(pageable);
+        return userRepository_jpa.findAll(pageable);
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @NoRepositoryBean
 public interface UserRepository_s extends CrudRepository<User, Integer> {
 
-    @Query("select * from user where id = :id")
+    @Query("select * from user where u_id = :id")
     public User findUserWithId(@Param("id") int id);
 
     @Query("select * from user where name = :name or age = :age")

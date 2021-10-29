@@ -16,11 +16,11 @@
     </resultMap>
 
     <select id="select" resultMap="userResultMap">
-        select u.*,p.* from user u, process p where u.u_id = #{id} and u.u_id = p.user_id
+        select u.*,p.* from user u left join process p on u.u_id = p.u_id where u.u_id = #{id}
     </select>
 
     <select id="all" resultMap="userResultMap">
-        select u.*,p.* from user u, process p where u.u_id = p.user_id
+        select u.*,p.* from user u left join process p on u.u_id = p.u_id
     </select>
 
 </mapper>

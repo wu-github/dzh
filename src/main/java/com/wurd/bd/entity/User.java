@@ -27,7 +27,7 @@ public class User {
     private String u_tel;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "u_id")
     private List<Process> processes;
 
     private int active = 1;

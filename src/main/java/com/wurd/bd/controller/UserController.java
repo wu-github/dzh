@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @RestController
@@ -115,8 +116,8 @@ public class UserController {
     @PostMapping("/_jpa/save")
     public User user_jpa_save(@RequestBody @Valid User user) throws Exception {
         try {
-            User test = userService_jpa.save(user);
-            return test;
+            User u = userService_jpa.save(user);
+            return u;
         } catch (CommonException e) {
             throw e;
         } catch (Exception e) {
