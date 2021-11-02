@@ -20,6 +20,8 @@ public interface UserRepository_jpa extends JpaRepository<User, String> {
     @Query("from User where name = :name or age = :age")
     public List<User> findUsersWithNameAge(@Param("name") String name, @Param("age") int age);
 
-    @Query(value = "select * from user", nativeQuery = true)
+    @Query(value = "select * from user",
+            countQuery = "select count(*) from user",
+            nativeQuery = true)
     public Page<User> findByPage(@PageableDefault Pageable pageable);
 }
