@@ -5,9 +5,12 @@
     <title></title>
 </head>
 <body>
-<h5 style="text-align: center;">
-    Welcome
-</h5>
+<div style="text-align: center;">
+    <h5>
+        Welcome
+    </h5>
+    <div id="timing"></div>
+</div>
 <script>
     var socket = null;
 
@@ -50,11 +53,25 @@
 <script>
     window.onload = function(){
         var url = '[[@{/}]]' + 'dzh/build/index.html';
+        var t = 3000;
         setTimeout(function(){
             window.location.href = url;
-        },3000);
+        },t);
+        var tag = document.getElementById("timing");
+        tag.innerHTML = t/1000;
+        var t_animate = tag.animate([{"fontSize": "55px"}],{duration:1000,iterations:Infinity})
+        var interval;
+        interval = setInterval(function(){
+            var currentT = parseInt(tag.innerHTML);
+            if(currentT < 1){
+                t_animate && t_animate.cancel();
+                interval && clearInterval(interval);
+                tag.innerHTML = "";
+            }else{
+                tag.innerHTML = currentT - 1;
+            }
+        },1000)
     }
-
 </script>
 
 </body>
