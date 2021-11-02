@@ -38,7 +38,7 @@ public class UserService_jpa implements IUserService_jpa {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = {Exception.class})
     public User save(User user) throws Exception {
         return userRepository_jpa.save(user);
     }
