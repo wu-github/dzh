@@ -64,7 +64,7 @@ module.exports = {
         }),
         new copyWebpackPlugin({
             patterns: [{
-                from: path.join(__dirname, 'public'),
+                from: path.join(__dirname, 'static/public'),
                 to: path.join(__dirname, 'build/public'),
                 toType: 'dir'
             }]

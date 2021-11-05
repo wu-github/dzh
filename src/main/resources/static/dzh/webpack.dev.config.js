@@ -7,6 +7,7 @@ module.exports = merge(baseWebpackConfig, {
     devServer: {
         static: [
             path.join(__dirname, 'server'),
+            path.join(__dirname, 'static'),
             path.join(__dirname)
         ]
     },
