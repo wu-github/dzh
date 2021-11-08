@@ -1,5 +1,5 @@
-# electron打包
-需要先设置环境变量：
+# electron首次打包
+先设置环境变量，需要下载相关包：
 
     set ELECTRON_MIRROR=https://cdn.npm.taobao.org/dist/electron/
 
