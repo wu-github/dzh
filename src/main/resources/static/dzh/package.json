@@ -12,11 +12,22 @@
         "build:p": "webpack --mode production --config webpack.prod.config.js",
         "electron": "electron .",
         "electron:b": "electron-builder",
-        "electron:p": "electron-packager . dzh --overwrite --win --out electron-packager-app --arch=x64 --electron-version=15.3.0 --ignore=\"(node_modules|src|server|static|electron-builder-app|.babelrc|.vscode|webpack.*)\""
+        "electron:p": "electron-packager . dzh --overwrite --win --out electron-packager-app --arch=x64 --electron-version=15.3.0 --ignore=\"(node_modules|src|server|static|electron-builder-app|.babelrc|.vscode|webpack.*|README.md)\""
     },
     "build": {
         "appId": "com.wurd",
         "productName": "dzh",
+        "compression": "store",
+        "asar": false,
+        "files": [
+            "electron",
+            "!node_modules/**/*",
+            "!package.json"
+        ],
+        "extraResources": {
+            "from": "./build",
+            "to": "app/build"
+        },
         "electronDownload": {
             "mirror": "https://npm.taobao.org/mirrors/electron/"
         },
@@ -24,7 +35,6 @@
             "output": "electron-builder-app"
         },
         "win": {
-            "icon": "public/image/favicon.ico",
             "target": [
                 "nsis"
             ]
