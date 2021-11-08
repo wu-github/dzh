@@ -7,12 +7,16 @@ function createWindow() {
     mainWin = new BrowserWindow({
         width: 800,
         height: 600,
+        show: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
     });
     // mainWin.openDevTools({ mode: 'bottom' });
     mainWin.loadFile('build/index.html');
+    mainWin.once('ready-to-show', function() {
+        mainWin.show();
+    })
 }
 
 app.whenReady().then(() => {
