@@ -1,14 +1,6 @@
-package com.wurd.bd.internalTest;
+package com.wurd.bd.internalTest1;
 
-import org.springframework.aop.config.AopConfigUtils;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.util.PathMatcher;
 import org.springframework.util.SystemPropertyUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Test {
     public static void main(String[] args) throws Exception{

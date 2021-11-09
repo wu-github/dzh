@@ -1,4 +1,4 @@
-package com.wurd.bd.internalTest;
+package com.wurd.bd.internalTest1;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
 

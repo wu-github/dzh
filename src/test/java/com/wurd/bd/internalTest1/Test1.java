@@ -1,7 +1,6 @@
-package com.wurd.bd.internalTest;
+package com.wurd.bd.internalTest1;
 
 import java.io.*;
-import java.util.Map;
 
 public class Test1 {
     public static void main(String[] args) throws IOException, ClassNotFoundException {

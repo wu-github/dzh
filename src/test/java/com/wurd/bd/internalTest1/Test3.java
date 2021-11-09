@@ -1,11 +1,9 @@
-package com.wurd.bd.internalTest;
+package com.wurd.bd.internalTest1;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class Test3 {
     public static void main(String[] args) {

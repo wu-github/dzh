@@ -1,4 +1,4 @@
-package com.wurd.bd.internalTest;
+package com.wurd.bd.internalTest1;
 
 public class Test6 {
     public static void main(String[] args) {
