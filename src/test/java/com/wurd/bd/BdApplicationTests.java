@@ -13,7 +13,8 @@ class BdApplicationTests {
 
     @Test
     void contextLoads() {
-        testLdap.query();
+        testLdap.auth();
+        testLdap.search();
     }
 
 }
