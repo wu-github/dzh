@@ -76,7 +76,7 @@ export default defineComponent({
         register.examples.forEach((element) => {
           if (element.title == value) {
             this.currentView = new element.view();
-            this.currentView.render(view);
+            this.currentView.render(view, this.$route);
           }
         });
       }

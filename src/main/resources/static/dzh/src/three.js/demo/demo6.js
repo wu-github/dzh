@@ -18,7 +18,7 @@ class demo6 extends demo {
         this.mouseY = 0;
     }
 
-    render(ele) {
+    render(ele, route) {
         let that = this;
         const renderer = this.renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setPixelRatio(window.devicePixelRatio);
@@ -53,7 +53,9 @@ class demo6 extends demo {
 
         function loadModel() {
             that.object.traverse(function(child) {
-                // if (child.isMesh) child.material.map = texture;
+                if (route.query.flag == 1 && child.isMesh) {
+                    child.material.map = texture;
+                }
             });
             that.object.position.y = -95;
             scene.add(that.object);
@@ -84,7 +86,6 @@ class demo6 extends demo {
 
         function animate() {
             that.animateId = requestAnimationFrame(animate);
-            controls.update();
 
             function a() {
                 that.camera.position.x += (that.mouseX - that.camera.position.x) * .05;
@@ -96,7 +97,7 @@ class demo6 extends demo {
         }
 
         register.onResize(camera, renderer);
-        document.addEventListener('mousemove', this.onDocumentMouseMove.bind(this));
+        // document.addEventListener('mousemove', this.onDocumentMouseMove.bind(this));
     }
 
     onDocumentMouseMove(event) {
