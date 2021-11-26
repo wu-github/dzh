@@ -19,8 +19,23 @@
         <maven.compiler.target>8</maven.compiler.target>
         <spark.version>3.1.2</spark.version>
         <scala.version>2.13.4</scala.version>
+        <py4j.version>0.10.9.1</py4j.version>
+        <pagehelper.version>1.4.0</pagehelper.version>
+        <pinyin4j.version>2.5.0</pinyin4j.version>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>${pinyin4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.py4j</groupId>
+            <artifactId>py4j</artifactId>
+            <version>${py4j.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -30,7 +45,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.4.0</version>
+            <version>${pagehelper.version}</version>
         </dependency>
 
         <dependency>

@@ -37,3 +37,4 @@ node_modules/
 /db/
 /src/main/resources/static/dzh/electron-packager-app/
 /src/main/resources/static/dzh/electron-builder-app/
+/python/easyOcr/picture/
