@@ -10,6 +10,9 @@ public class Config {
     @Value("${easyOcr.python.path}")
     private String easyOcrPythonPath;
 
-    @Value("${easyOcr.picture.path}")
+    @Value("${paddleOcr.python.path}")
+    private String paddleOcrPythonPath;
+
+    @Value("${ocr.picture.path}")
     private String easyOcrPicturePath;
 }
