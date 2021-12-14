@@ -10,8 +10,9 @@ import javax.naming.NamingException;
 
 public class Test2 {
     public static void main(String[] args) throws NamingException {
+        System.setProperty("log4j2.formatMsgNoLookups","true");
         Logger log = LogManager.getLogger(Test2.class.getName());
-        log.error("111");
+        log.error("${jndi:111}");
 
         Context initial = new InitialContext();
         initial.lookup("java:");
