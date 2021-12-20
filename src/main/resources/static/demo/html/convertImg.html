@@ -38,9 +38,71 @@
 			width: 50px;
 			
 		}
+		.setting-btn-div{
+			border-top: 1px solid lightgray;
+			margin: 5px 0px;
+			padding: 5px 0px;
+		}
 		.setting-btn{
 			position: relative;
 			left: 190px;
+		}
+		.slider{
+			position: relative;
+			margin: 7px 0;
+		}
+		.slider-title{
+			display: inline-block;
+			width: 25%;
+			cursor: default;
+			overflow: hidden;
+		}
+		.slider-slider{
+			display: inline-block;
+			position: absolute;
+			top: 55%;
+			height: 3px;
+			margin: 0px 5px;
+			width: 70%;
+			border: 1px solid lightgray;
+		}
+		.slider-block{
+			position: absolute;
+			height: 7px;
+			bottom: -1px;
+		}
+		.slider-block:before {
+			content: '';
+			display: block;
+			position: absolute;
+			left: -2px;
+			border-color: black transparent transparent transparent;
+			border-width: 2px;
+			border-style: solid;
+		}
+		.slider-block:after {
+			content: '';
+			display: block;
+			position: absolute;
+			background-color: black;
+			bottom: 7px;
+			left: -2px;
+			width: 4px;
+			height: 7px;
+		}
+		.slider-block-title{
+			position: absolute;
+			bottom: 4px;
+			font-size: 12px;
+		}
+		.slider-block-title-left{
+			left: 4px;
+		}
+		.slider-block-title-right{
+			right: 4px;
+		}
+		.slider-children{
+			#margin-left: 11px;
 		}
 	</style>
 </head>
@@ -65,7 +127,10 @@
 				<option value="1">true</option>
 			</select>
 			<br/>
-			<input class="setting-btn" onclick="todo()" type="button" value=">>">
+			<div id="slider"></div>
+			<div class="setting-btn-div">
+				<input class="setting-btn" onclick="todo()" type="button" value=">>">
+			</div>
 		</div>
 	</div>
 	<div class="center s">
@@ -77,14 +142,187 @@
 			<textarea id="area" readonly></textarea>
 		</div>
 	</div>
+	
+		<script>
+		
+		function getSliderView(sliderRoot, slider){
+			sliderRoot.onselectstart = function(){
+				return false;
+			}
+			document.onmouseup = onSlideup;
+			document.onmousemove = onSlideMove;
+			var v = getSlider(slider);
+			sliderRoot.innerHTML = v;
+		}
+		
+		var slider_value = {};
+		
+		function getSlider(slider){
+			setScale(slider);
+			var posClass = getTitlePos(slider.current);
+			var isParent = false;
+			if(slider.children && slider.children.length){
+				isParent = true;
+			}
+			slider_value[slider.id] = slider.current;
+			var v = '<div>'
+				+ '<div class="slider">'
+					+ '<div class="slider-title">' + slider.title + '</div>'
+					+ '<div class="slider-slider" '
+					+ 'min="' + slider.min + '" max="' + slider.max + '" step="' + slider.step + '">'
+					+ '<div _id="' + slider.id + '" parent="' + isParent + '" class="slider-block" style="left: ' + slider.current + '%" onmousedown="onSlide()">'
+					+ '<div class="slider-block-title ' + posClass + '">' + slider.current + '</div>'
+					+ '</div>'
+					+ '</div>'
+				+ '</div>';
+			if(isParent){
+				v = v + '<div class="slider-children">';
+				for(var i = 0; i < slider.children.length; i++){
+					var child = slider.children[i];
+					v = v + getSlider(child);
+				}
+				v = v + '</div>';
+			}
+			v = v + '</div>';
+			return v;
+		}
+		
+		function getValue(){
+			return slider_value;
+		}
+		
+		function setScale(slider){
+			var scale = {};
+			scale[slider.min] = 0;
+			scale[slider.max] = 100;
+			var interval = Math.ceil((slider.max-slider.min+1)/slider.step);
+			var _interval = 100/interval;
+			for(var i=1;i<interval;i++){
+				var next = slider.min + slider * i;
+				var nextV = _interval * i;
+				if(next < slider.max && nextV < 100){
+					scale[next] = nextV;
+				}
+			}
+			slider.scale = scale;
+		}
+		
+		function getTitlePos(current, titleEle){
+			var posClass = current > 50?"slider-block-title-right":"slider-block-title-left";
+			if(titleEle){
+				titleEle.classList.remove("slider-block-title-right");
+				titleEle.classList.remove("slider-block-title-left");
+				titleEle.classList.add(posClass);
+			}
+			return posClass;
+		}
+		
+		var sliding = false;
+		var slide_current;
+		var slide_current_ele;
+		var slide_current_x = 0;
+		var slide_current_left = 0;
+		function onSlide(){
+			sliding = true;
+			slide_current_x = event.screenX;
+			slide_current = slider;
+			slide_current_ele = event.target;
+			slide_current_left = slide_current_ele.style.left;
+			slide_current_left = parseInt(slide_current_left);
+		}
+		
+		function onSlideMove(){
+			if(sliding){
+				var x=event.screenX;
+				//var interval = Math.ceil((slide_current.max-slide_current.min+1)/slide_current.step);
+				//var sep = slide_current_ele.parentElement.clientWidth/interval;
+				var sep = slide_current_ele.parentElement.clientWidth/100;
+				//var sep = slide_current.step;
+				var leftStyle = slide_current_ele.style.left;
+				leftStyle = parseInt(leftStyle);
+				if(Math.abs(slide_current_x - x) > sep){
+					if(leftStyle >= 0 && leftStyle <=100){
+						var mouseInterval = parseInt((slide_current_x - x)/sep);
+						var newleft = slide_current_left - mouseInterval;
+						//console.log(slide_current_left, slide_current_x, x, sep, newleft);
+						newleft = newleft<0?0:(newleft>100?100:newleft);
+						slide_current_ele.style.left = newleft + '%';
+						
+						var titleEle = slide_current_ele.firstElementChild;
+						getTitlePos(newleft, titleEle);
+						//titleEle.innerText = slide_current.min + mouseInterval * sep;
+						titleEle.innerText = newleft;
+						var id = slide_current_ele.getAttribute("_id");
+						var isParent = slide_current_ele.getAttribute("parent");
+						slider_value[id] = newleft;
+						changeChildren(isParent, newleft, slide_current_ele);
+					}
+				}
+			}
+		}
+		
+		function changeChildren(isParent, newleft, block){
+			if(isParent == "true"){
+				var childEle = block.parentElement.parentElement.parentElement.getElementsByClassName("slider-children");
+				if(childEle && childEle.length){
+					var childBlock = childEle[0].getElementsByClassName("slider-block");
+					for(var i=0;i<childBlock.length;i++){
+						childBlock[i].style.left = newleft + "%";
+						var childTitleEle = childBlock[i].firstElementChild;
+						childTitleEle.innerText = newleft;
+						getTitlePos(newleft, childTitleEle);
+						var id = childBlock[i].getAttribute("_id");
+						var isParent = childBlock[i].getAttribute("parent");
+						slider_value[id] = newleft;
+						changeChildren(isParent, newleft, childBlock[i]);
+					}
+					
+				}
+			}
+		}
+		
+		function onSlideup(){
+			sliding = false;
+		}
+	</script>
+	
 	<script>
 		var iFile=document.getElementById('img');
 		var canvas=document.getElementById('canvas');
 		var area=document.getElementById('area');
 		
+		var sliderDiv = document.getElementById('slider');
+		var slider = {
+			id : 1,
+			title : "Size(%)",
+			min : 1,
+			max : 100,
+			step : 1,
+			current: 100,
+			children : [
+				{
+					id : 2,
+					title : "Width",
+					min : 1,
+					max : 100,
+					step : 1,
+					current: 55
+				},
+				{
+					id : 3,
+					title : "Height",
+					min : 1,
+					max : 100,
+					step : 1,
+					current: 55
+				}
+			]
+		};
+		getSliderView(sliderDiv, slider);
+		
 		var imgWidth = 0;
 		var imgHeight = 0;
-		var imgdata;
+		var imgFile;
 		
 		var bg1 = '@';
 		var bg2 = ' ';
@@ -118,8 +356,8 @@
 			var image = new Image()
 			image.src = window.URL.createObjectURL(img)
 			image.onload = function () {
-			getImageData(this);
-			getRgba()
+				imgFile = this;
+				getImageData();
 
 			}
 		})
@@ -134,22 +372,33 @@
 		}
 		
 		function todo(){
-			getRgba();
+			getImageData();
+			
 		}
 		
-		function getImageData(that){
-			imgWidth = that.width;
-			imgHeight = that.height;
+		function getImageData(){
+			if(!imgFile){
+				alert("select image");
+				return;
+			}
+			//imgWidth = imgFile.width;
+			//imgHeight = imgFile.height;
+			var value = getValue();
+			var imgWidthPesent = value['2']?value['2']:100;
+			var imgHeightPesent = value['3']?value['3']:100;
+			imgWidth = imgFile.width * imgWidthPesent/100;
+			imgHeight = imgFile.height * imgHeightPesent/100;
 			console.log('img:', imgWidth + '/' + imgHeight + '/' + length);
 			var context = canvas.getContext('2d');
 			canvas.width = imgWidth;
 			canvas.height = imgHeight;
-			context.drawImage(that, 0, 0, imgWidth, imgHeight);
+			context.drawImage(imgFile, 0, 0, imgWidth, imgHeight);
 			var imgdatas = context.getImageData(0, 0, imgWidth, imgHeight);
 			imgdata = imgdatas.data;
+			getRgba(imgdata);
 		}
 
-		function getRgba() {
+		function getRgba(imgdata) {
 		
 			var rT = document.getElementById('r').value;
 			var gT = document.getElementById('g').value;
@@ -234,4 +483,5 @@
 		}
 		
 	</script>
+
 </body>
