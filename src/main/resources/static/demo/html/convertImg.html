@@ -115,17 +115,20 @@
 			↓↑
 		</div>
 		<div id="setting" style="display: none;">
-			<label>r</label><input id="r" type="text" value="100"/><br/>
-			<label>g</label><input id="g" type="text" value="100"/><br/>
-			<label>b</label><input id="b" type="text" value="100"/><br/>
+			<label>r</label><input id="r" type="text" value="125"/><br/>
+			<label>g</label><input id="g" type="text" value="125"/><br/>
+			<label>b</label><input id="b" type="text" value="125"/><br/>
 			<label>a</label><input id="a" type="text" value="0.5"/><br/>
-			<label>hh</label><input id="hh" type="text" value="5"/><br/>
-			<label>dense</label><input id="dense" type="text" value="2"/><br/>
+			<label>hh</label><input id="hh" type="text" value="2"/><br/>
+			<label>dense</label><input id="dense" type="text" value="1"/><br/>
 			<label>revert</label>
 			<select id="revert">
 				<option value="0">false</option>
 				<option value="1">true</option>
 			</select>
+			<br/>
+			<label>bg1</label><input id="bg1" type="text" value="@"/><br/>
+			<label>bg2</label><input id="bg2" type="text" value="."/><br/>
 			<br/>
 			<div id="slider"></div>
 			<div class="setting-btn-div">
@@ -324,9 +327,6 @@
 		var imgHeight = 0;
 		var imgFile;
 		
-		var bg1 = '@';
-		var bg2 = ' ';
-		
 		var rV;
 		var gV;
 		var bV;
@@ -408,12 +408,12 @@
 			var denseT = document.getElementById('dense').value;
 			var revertT = document.getElementById('revert').value;
 			
-			rV = rT?parseInt(rT):100;
-			gV = gT?parseInt(gT):100;
-			bV = bT?parseInt(bT):100;
+			rV = rT?parseInt(rT):125;
+			gV = gT?parseInt(gT):125;
+			bV = bT?parseInt(bT):125;
 			aV = aT?parseFloat(aT):0.5;
-			hhV = hhT?parseInt(hhT):5;
-			denseV = denseT?parseInt(denseT):2;
+			hhV = hhT?parseInt(hhT):2;
+			denseV = denseT?parseInt(denseT):1;
 			revertV = revertT=='1'?true:false;
 		
 			var length = imgdata.length;
@@ -442,6 +442,8 @@
 		function draw(matrix){
 			var content = '';
 			var flag1 = 0,flag2 = 0;
+			var bg1 = document.getElementById('bg1').value;
+			var bg2 = document.getElementById('bg2').value;
 			for(var i=0;i<matrix.length;i = i + hhV){
 				var line = matrix[i];
 				for(var j=0;j<line.length;j++){
