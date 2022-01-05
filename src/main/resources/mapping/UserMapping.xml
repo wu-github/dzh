@@ -23,4 +23,18 @@
         select u.*,p.* from user u left join process p on u.u_id = p.u_id
     </select>
 
+    <update id="update" parameterType="com.wurd.bd.entity.User">
+        update user 
+        <set>
+            <if test="u_name != null and u_name != ''">
+                u_name = #{u_name},
+            </if>
+            <if test="u_tel != null and u_tel != ''">
+                u_tel = #{u_tel},
+            </if>
+            active = #{active}
+        </set>
+        where u_id = #{u_id}
+    </update>
+
 </mapper>

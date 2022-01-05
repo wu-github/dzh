@@ -12,4 +12,6 @@ public interface IUserService_m {
     List<User> getAllUser() throws Exception;
 
     PageInfo<User> getUserPage(int pageNum, int pageSize) throws Exception;
+
+    void update(List<User> users) throws Exception;
 }

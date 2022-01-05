@@ -74,6 +74,19 @@ public class UserController {
         }
     }
 
+    @PostMapping("/_m/update")
+    public List<User> user_m_update(@RequestBody @Valid List<User> users) throws Exception {
+        try {
+            userService_m.update(users);
+            return users;
+        } catch (CommonException e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CommonException(messageUtil.getMessage(Constants.ERROR_USER_UPDATE));
+        }
+    }
+
     @GetMapping("/_jpa/all")
     public Iterator<User> user_jpa_all() throws Exception {
         try {

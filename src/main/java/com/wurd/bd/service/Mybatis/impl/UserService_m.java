@@ -7,6 +7,7 @@ import com.wurd.bd.database.mybatis.mapper.UserRepository_m;
 import com.wurd.bd.service.Mybatis.IUserService_m;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,4 +34,13 @@ public class UserService_m implements IUserService_m {
         PageInfo<User> pageInfo = new PageInfo<User>(users);
         return pageInfo;
     }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void update(List<User> users) throws Exception{
+        for(User user : users){
+            int r = userRepository_m.update(user);
+        }
+    }
+
 }

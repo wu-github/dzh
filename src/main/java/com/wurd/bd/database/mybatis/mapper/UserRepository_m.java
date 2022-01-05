@@ -13,5 +13,7 @@ public interface UserRepository_m {
     User select(int id);
 
     List<User> all();
+
+    int update(User user);
 }
 
